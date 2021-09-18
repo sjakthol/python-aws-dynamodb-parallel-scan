@@ -3,9 +3,11 @@ name = "aws-dynamodb-parallel-scan"
 version = "0.1.0"
 description = "Amazon DynamoDB Parallel Scan Paginator for boto3."
 authors = ["Sami Jaktholm <sjakthol@outlook.com>"]
+license = "MIT"
 packages = [
   {include = "py.typed"}
 ]
+readme = 'README.md'
 
 [tool.poetry.dependencies]
 boto3 = "^1.18.43"
