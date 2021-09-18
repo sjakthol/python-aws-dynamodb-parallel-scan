@@ -1,0 +1,9 @@
+.pytest_cache
+.tox
+__pycache__
+.mypy_cache
+.coverage
+
+dist/
+*.tar.gz
+*.whl
