@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "aws-dynamodb-parallel-scan"
-version = "0.1.0"
+version = "0.2.0"
 description = "Amazon DynamoDB Parallel Scan Paginator for boto3."
 authors = ["Sami Jaktholm <sjakthol@outlook.com>"]
 license = "MIT"
@@ -8,6 +8,11 @@ packages = [
   {include = "py.typed"}
 ]
 readme = 'README.md'
+repository = "https://github.com/sjakthol/python-aws-dynamodb-parallel-scan"
+
+[tool.poetry.scripts]
+aws-dynamodb-parallel-scan = 'aws_dynamodb_parallel_scan:cli'
+
 
 [tool.poetry.dependencies]
 boto3 = "^1.18.43"
@@ -24,6 +29,7 @@ pytest = "^6.2.5"
 pytest-cov = "^2.12.1"
 safety = "^1.10.3"
 tox = "^3.24.4"
+moto = {extras = ["dynamodb2"], version = "^2.2.7"}
 
 [build-system]
 requires = ["poetry-core>=1.0.0"]

@@ -4,8 +4,14 @@ Adapted from parallel scan implementation of Alex Chan (MIT license):
 https://alexwlchan.net/2020/05/getting-every-item-from-a-dynamodb-table-with-python/
 """
 
+import argparse
 import concurrent.futures
+import decimal
+import json
+import textwrap
 import typing
+
+import boto3
 
 if typing.TYPE_CHECKING:  # pragma: no cover
     from mypy_boto3_dynamodb import DynamoDBClient
@@ -90,3 +96,103 @@ def get_paginator(client: DynamoDBClient):
     Returns: Paginator object.
     """
     return Paginator(client)
+
+
+def cli():
+    """Entrypoint for CLI tool."""
+
+    def json_value(value: str):
+        return json.loads(value)
+
+    class DecimalEncoder(json.JSONEncoder):
+        """JSON encoder for DynamoDB Decimal types."""
+
+        def default(self, o):
+            if isinstance(o, decimal.Decimal):
+                if abs(o) % 1 > 0:
+                    return float(o)
+                return int(o)
+            return super().default(o)  # pragma: nocover
+
+    parser = argparse.ArgumentParser(
+        formatter_class=argparse.RawDescriptionHelpFormatter,
+        description=textwrap.dedent(
+            """
+            Perform a parallel scan of DynamoDB table.
+
+            Command line arguments map one-to-one to DynamoDB Scan request arguments. See
+            https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/dynamodb.html#DynamoDB.Client.scan
+            for reference.
+            """
+        ),
+        epilog="Results are written to stdout as JSON objects (one per line).",
+    )
+    parser.add_argument(
+        "--table-name", dest="TableName", metavar="<value>", required=True
+    )
+    parser.add_argument("--index-name", dest="IndexName", metavar="<value>")
+    parser.add_argument("--limit", dest="Limit", metavar="<value>", type=int)
+    parser.add_argument(
+        "--return-consumed-capacity",
+        dest="ReturnConsumedCapacity",
+        metavar="<value>",
+    )
+    parser.add_argument(
+        "--total-segments", dest="TotalSegments", metavar="<value>", type=int
+    )
+    parser.add_argument(
+        "--projection-expression",
+        dest="ProjectionExpression",
+        metavar="<value>",
+    )
+    parser.add_argument(
+        "--filter-expression", dest="FilterExpression", metavar="<value>"
+    )
+    parser.add_argument("--consistent-read", dest="ConsistentRead", action="store_true")
+    parser.add_argument(
+        "--expression-attribute-names",
+        dest="ExpressionAttributeNames",
+        metavar="<value>",
+        type=json_value,
+        help="""ExpressionAttributeNames as JSON string (e.g. {"#P":"Percentile"})""",
+    )
+    parser.add_argument(
+        "--expression-attribute-values",
+        dest="ExpressionAttributeValues",
+        metavar="<value>",
+        type=json_value,
+        help="""ExpressionAttributeValues as JSON string (e.g. {":variable": {"S": "sample"}})""",
+    )
+
+    parser.add_argument(
+        "--use-document-client",
+        action="store_true",
+        help="Use a document client that converts DynamoDB types to native types automatically.",
+    )
+    parser.add_argument(
+        "--output-items",
+        action="store_true",
+        help="Output returned items, not full Scan API responses",
+    )
+    args = vars(parser.parse_args())
+
+    output_items = args.pop("output_items", False)
+    use_document_client = args.pop("use_document_client", False)
+    scan_args = {k: v for k, v in args.items() if v is not None}
+
+    client = (
+        boto3.client("dynamodb")
+        if not use_document_client
+        else boto3.resource("dynamodb").meta.client
+    )
+    paginator = get_paginator(client)
+    for page in paginator.paginate(**scan_args):
+        if output_items:
+            for item in page.get("Items", []):
+                print(json.dumps(item, cls=DecimalEncoder))
+        else:
+            print(json.dumps(page, cls=DecimalEncoder))
+
+
+if __name__ == "__main__":  # pragma: no cover
+    cli()

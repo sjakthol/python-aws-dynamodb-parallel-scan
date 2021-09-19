@@ -45,6 +45,58 @@ Notes:
 See boto3 [DynamoDB.Client.scan() documentation](https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/dynamodb.html#DynamoDB.Client.scan)
 for details on supported arguments and the response format.
 
+## CLI
+
+This package also provides a CLI tool (`aws-dynamodb-parallel-scan`) to scan a DynamoDB table
+with parallel scan. The tool supports all non-deprecated arguments of DynamoDB Scan API. Execute
+`aws-dynamodb-parallel-scan -h` for details
+
+Here's some examples:
+
+```bash
+# Scan "mytable" sequentially
+$ aws-dynamodb-parallel-scan --table-name mytable
+{"Items": [...], "Count": 10256, "ScannedCount": 10256, "ResponseMetadata": {}}
+{"Items": [...], "Count": 12, "ScannedCount": 12, "ResponseMetadata": {}}
+
+# Scan "mytable" in parallel (5 parallel segments)
+$ aws-dynamodb-parallel-scan --table-name mytable --total-segments 5
+{"Items": [...], "Count":32, "ScannedCount":32, "ResponseMetadata": {}}
+{"Items": [...], "Count":47, "ScannedCount":47, "ResponseMetadata": {}}
+{"Items": [...], "Count":52, "ScannedCount":52, "ResponseMetadata": {}}
+{"Items": [...], "Count":34, "ScannedCount":34, "ResponseMetadata": {}}
+{"Items": [...], "Count":40, "ScannedCount":40, "ResponseMetadata": {}}
+
+# Scan "mytable" in parallel and return items, not Scan API responses (--output-items flag)
+$ aws-dynamodb-parallel-scan --table-name mytable --total-segments 5 \
+    --output-items
+{"pk": {"S": "item1"}, "quantity": {"N": "99"}}
+{"pk": {"S": "item24"}, "quantity": {"N": "25"}}
+...
+
+# Scan "mytable" in parallel, return items with native types, not DynamoDB types (--use-document-client flag)
+$ aws-dynamodb-parallel-scan --table-name mytable --total-segments 5 \
+    --output-items --use-document-client
+{"pk": "item1", "quantity": 99}
+{"pk": "item24", "quantity": 25}
+...
+
+# Scan "mytable" with a filter expression, return items
+$ aws-dynamodb-parallel-scan --table-name mytable --total-segments 5 \
+    --filter-expression "quantity < :value" \
+    --expression-attribute-values '{":value": {"N": "5"}}' \
+    --output-items
+{"pk": {"S": "item142"}, "quantity": {"N": "4"}}
+{"pk": {"S": "item874"}, "quantity": {"N": "1"}}
+
+# Scan "mytable" with a filter expression using native types, return items
+$ aws-dynamodb-parallel-scan --table-name mytable --total-segments 5 \
+    --filter-expression "quantity < :value" \
+    --expression-attribute-values '{":value": 5}' \
+    --use-document-client --output-items
+{"pk": "item142", "quantity": 4}
+{"pk": "item874", "quantity": 1}
+```
 
 ## Development
 
