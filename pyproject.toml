@@ -30,7 +30,7 @@ pytest = "^6.2.5"
 pytest-cov = "^3.0.0"
 safety = "^1.10.3"
 tox = "^3.24.4"
-moto = {extras = ["dynamodb2"], version = "^2.2.15"}
+moto = {extras = ["dynamodb2"], version = "^2.2.16"}
 
 [build-system]
 requires = ["poetry-core>=1.0.0"]
