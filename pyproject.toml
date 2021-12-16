@@ -24,7 +24,7 @@ bandit = "^1.7.1"
 black = "^21.12b0"
 boto3-stubs = {extras = ["dynamodb"], version = "^1.20.24"}
 more-itertools = "^8.12.0"
-mypy = "^0.910"
+mypy = "^0.920"
 pylint = "^2.12.2"
 pytest = "^6.2.5"
 pytest-cov = "^3.0.0"
