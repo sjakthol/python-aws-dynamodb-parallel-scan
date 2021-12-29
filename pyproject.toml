@@ -29,7 +29,7 @@ pylint = "^2.12.2"
 pytest = "^6.2.5"
 pytest-cov = "^3.0.0"
 safety = "^1.10.3"
-tox = "^3.24.4"
+tox = "^3.24.5"
 moto = {extras = ["dynamodb2"], version = "^2.3.0"}
 
 [build-system]
