@@ -28,4 +28,4 @@ jobs:
           poetry install
       - name: Lint and test
         run: |
-          poetry run tox -e lint,test
+          make -k lint test

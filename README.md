@@ -68,14 +68,14 @@ $ aws-dynamodb-parallel-scan --table-name mytable --total-segments 5
 {"Items": [...], "Count":40, "ScannedCount":40, "ResponseMetadata": {}}
 
 # Scan "mytable" in parallel and return items, not Scan API responses (--output-items flag)
-$ aws-dynamodb-parallel-scan --table-name mytable --total-segments 5 \
+$ aws-dynamodb-parallel-scan --table-name mytable --total-segments 5 \
     --output-items
 {"pk": {"S": "item1"}, "quantity": {"N": "99"}}
 {"pk": {"S": "item24"}, "quantity": {"N": "25"}}
 ...
 
 # Scan "mytable" in parallel, return items with native types, not DynamoDB types (--use-document-client flag)
-$ aws-dynamodb-parallel-scan --table-name mytable --total-segments 5 \
+$ aws-dynamodb-parallel-scan --table-name mytable --total-segments 5 \
     --output-items --use-document-client
 {"pk": "item1", "quantity": 99}
 {"pk": "item24", "quantity": 25}
@@ -103,14 +103,17 @@ $ aws-dynamodb-parallel-scan --table-name mytable --total-segments 5 \
 Requires Python 3 and Poetry. Useful commands:
 
 ```bash
-# Run tests
-poetry run tox -e test
+# Setup environment
+poetry install
+
+# Run tests (integration test requires rights to create, delete and use DynamoDB tables)
+make test
 
 # Run linters
-poetry run tox -e lint
+make -k lint
 
 # Format code
-poetry run tox -e format
+make format
 ```
 
 ## License
