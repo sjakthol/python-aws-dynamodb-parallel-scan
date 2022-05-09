@@ -679,7 +679,7 @@ python-versions = ">=3.5"
 
 [[package]]
 name = "moto"
-version = "3.1.7"
+version = "3.1.8"
 description = "A library that allows your python tests to easily mock out the boto library"
 category = "dev"
 optional = false
@@ -1113,7 +1113,7 @@ testing = ["pytest (>=6)", "pytest-checkdocs (>=2.4)", "pytest-flake8", "pytest-
 [metadata]
 lock-version = "1.1"
 python-versions = "^3.7"
-content-hash = "677544a6c6da114dc1368ed6a2fd861722d2a579d160f4267577fa172fb5e936"
+content-hash = "ed6e6a732cbbb69b44f5c885f271172a13e313e6fd19e0d668a377d5ef8b46c8"
 
 [metadata.files]
 astroid = [
@@ -1436,8 +1436,8 @@ more-itertools = [
     {file = "more_itertools-8.13.0-py3-none-any.whl", hash = "sha256:c5122bffc5f104d37c1626b8615b511f3427aa5389b94d61e5ef8236bfbc3ddb"},
 ]
 moto = [
-    {file = "moto-3.1.7-py3-none-any.whl", hash = "sha256:4ab6fb8dd150343e115d75e3dbdb5a8f850fc7236790819d7cef438c11ee6e89"},
-    {file = "moto-3.1.7.tar.gz", hash = "sha256:20607a0fd0cf6530e05ffb623ca84d3f45d50bddbcec2a33705a0cf471e71289"},
+    {file = "moto-3.1.8-py3-none-any.whl", hash = "sha256:19dd772ab1092ef8b74a4dd801dbdf1cf6f3b181c1dff5f2343884162e33bf6f"},
+    {file = "moto-3.1.8.tar.gz", hash = "sha256:bde95005ec42a88448a98809397030f9e886387f469dcd2fcbc7f38d75858872"},
 ]
 mypy = [
     {file = "mypy-0.950-cp310-cp310-macosx_10_9_universal2.whl", hash = "sha256:cf9c261958a769a3bd38c3e133801ebcd284ffb734ea12d01457cb09eacf7d7b"},
