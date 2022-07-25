@@ -94,11 +94,11 @@ crt = ["botocore[crt] (>=1.21.0,<2.0a0)"]
 
 [[package]]
 name = "boto3-stubs"
-version = "1.24.31"
-description = "Type annotations for boto3 1.24.31 generated with mypy-boto3-builder 7.9.1"
+version = "1.24.36.post1"
+description = "Type annotations for boto3 1.24.36 generated with mypy-boto3-builder 7.10.0"
 category = "dev"
 optional = false
-python-versions = ">=3.6"
+python-versions = ">=3.7"
 
 [package.dependencies]
 botocore-stubs = "*"
@@ -819,8 +819,8 @@ python-versions = ">=3.6"
 importlib-metadata = {version = ">=0.12", markers = "python_version < \"3.8\""}
 
 [package.extras]
-dev = ["pre-commit", "tox"]
-testing = ["pytest", "pytest-benchmark"]
+testing = ["pytest-benchmark", "pytest"]
+dev = ["tox", "pre-commit"]
 
 [[package]]
 name = "py"
@@ -916,7 +916,7 @@ coverage = {version = ">=5.2.1", extras = ["toml"]}
 pytest = ">=4.6"
 
 [package.extras]
-testing = ["fields", "hunter", "process-tests", "six", "pytest-xdist", "virtualenv"]
+testing = ["virtualenv", "pytest-xdist", "six", "process-tests", "hunter", "fields"]
 
 [[package]]
 name = "python-dateutil"
@@ -1128,7 +1128,7 @@ testing = ["pytest (>=6)", "pytest-checkdocs (>=2.4)", "pytest-flake8", "pytest-
 [metadata]
 lock-version = "1.1"
 python-versions = "^3.7"
-content-hash = "b7c4883f0ae0c7908eb112a516aa152708de04f3c384336937a7ebee595b5caa"
+content-hash = "197461f7d714adad7174843d159d496102caba5e12b399f75dbd55c44afc3852"
 
 [metadata.files]
 astroid = [
@@ -1177,8 +1177,8 @@ boto3 = [
     {file = "boto3-1.24.31.tar.gz", hash = "sha256:de067346942c6d1730b513783385620519b8b2935f5b0ee2e66d565ffb57ce12"},
 ]
 boto3-stubs = [
-    {file = "boto3-stubs-1.24.31.tar.gz", hash = "sha256:dd1e027bf894a8d4dc509681c86160c70e1974d215813bca857ebf4123a8b307"},
-    {file = "boto3_stubs-1.24.31-py3-none-any.whl", hash = "sha256:5d110c382c68a14f1117e584b134e8d7e172b5665e54292b1ad22354fa07df45"},
+    {file = "boto3-stubs-1.24.36.post1.tar.gz", hash = "sha256:39acbbc8c87a101bdf46e058fbb012d044b773b43f7ed02cc4c24192a564411e"},
+    {file = "boto3_stubs-1.24.36.post1-py3-none-any.whl", hash = "sha256:ca3b3066773fc727fea0dbec252d098098e45fe0def011b22036ef674344def2"},
 ]
 botocore = [
     {file = "botocore-1.27.31-py3-none-any.whl", hash = "sha256:cbe87fa791aa4e8c3da64b1ccbaca7f809f6d1fba8d0b1855de2989815ef8736"},
