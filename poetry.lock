@@ -678,7 +678,7 @@ python-versions = ">=3.6"
 
 [[package]]
 name = "more-itertools"
-version = "8.13.0"
+version = "8.14.0"
 description = "More routines for operating on iterables, beyond itertools"
 category = "dev"
 optional = false
@@ -1129,7 +1129,7 @@ docs = ["rst.linker (>=1.9)", "jaraco.packaging (>=9)", "sphinx"]
 [metadata]
 lock-version = "1.1"
 python-versions = "^3.7"
-content-hash = "bc1d1c7eef1239723a662f82be0a3252b67b3de9ce6377b30691bac30aba4344"
+content-hash = "a1533f489e60f68cf23d39e6296974331c48cabef71dc78b371f73de0a20b060"
 
 [metadata.files]
 astroid = [
@@ -1448,8 +1448,8 @@ mccabe = [
     {file = "mccabe-0.7.0.tar.gz", hash = "sha256:348e0240c33b60bbdf4e523192ef919f28cb2c3d7d5c7794f74009290f236325"},
 ]
 more-itertools = [
-    {file = "more-itertools-8.13.0.tar.gz", hash = "sha256:a42901a0a5b169d925f6f217cd5a190e32ef54360905b9c39ee7db5313bfec0f"},
-    {file = "more_itertools-8.13.0-py3-none-any.whl", hash = "sha256:c5122bffc5f104d37c1626b8615b511f3427aa5389b94d61e5ef8236bfbc3ddb"},
+    {file = "more-itertools-8.14.0.tar.gz", hash = "sha256:c09443cd3d5438b8dafccd867a6bc1cb0894389e90cb53d227456b0b0bccb750"},
+    {file = "more_itertools-8.14.0-py3-none-any.whl", hash = "sha256:1bc4f91ee5b1b31ac7ceacc17c09befe6a40a503907baf9c839c229b5095cfd2"},
 ]
 moto = [
     {file = "moto-3.1.17-py3-none-any.whl", hash = "sha256:84797321fad9a9e924c1c0385b302c80ec23429724c016b504f4bfca9d40d33a"},
