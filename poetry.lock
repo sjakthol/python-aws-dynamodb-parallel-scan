@@ -94,8 +94,8 @@ crt = ["botocore[crt] (>=1.21.0,<2.0a0)"]
 
 [[package]]
 name = "boto3-stubs"
-version = "1.24.52"
-description = "Type annotations for boto3 1.24.52 generated with mypy-boto3-builder 7.11.6"
+version = "1.24.56"
+description = "Type annotations for boto3 1.24.56 generated with mypy-boto3-builder 7.11.7"
 category = "dev"
 optional = false
 python-versions = ">=3.7"
@@ -1131,7 +1131,7 @@ docs = ["rst.linker (>=1.9)", "jaraco.packaging (>=9)", "sphinx"]
 [metadata]
 lock-version = "1.1"
 python-versions = "^3.7"
-content-hash = "15ee884a81276e2cfc313a999f3a3991c8c5a96c71b7887945aca004b723307b"
+content-hash = "2fe588a3fab44cfe786e7ffa103a6bb6c6a25a0cb6e2fd47962aa41900ba3caa"
 
 [metadata.files]
 astroid = [
@@ -1180,8 +1180,8 @@ boto3 = [
     {file = "boto3-1.24.56.tar.gz", hash = "sha256:9fab8acec76008797be4671d514f39f1163ba044c0a0bce8d5afe8b52cbd5550"},
 ]
 boto3-stubs = [
-    {file = "boto3-stubs-1.24.52.tar.gz", hash = "sha256:5c799a5aca87b1aeb3d4515d92806ecf3c3e3df4e684181a1f3548f6feb04518"},
-    {file = "boto3_stubs-1.24.52-py3-none-any.whl", hash = "sha256:1d587d4ab8fc134522106e7360f841f390a4895b32824d07c684074cc56530e5"},
+    {file = "boto3-stubs-1.24.56.tar.gz", hash = "sha256:02e11b3669481469b45eee53fa5e0b587e5710f86bb95bd40667d1353d1e4bf6"},
+    {file = "boto3_stubs-1.24.56-py3-none-any.whl", hash = "sha256:e5df3a68ddb8299404f63d19decc1f706ebdac64f3133c1e1cab747820337a75"},
 ]
 botocore = [
     {file = "botocore-1.27.56-py3-none-any.whl", hash = "sha256:81df81b1a1c5608b3a7aca6a837acb27552c3ecc92584a58b171c60754b1d4eb"},
