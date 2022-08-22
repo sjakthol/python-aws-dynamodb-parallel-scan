@@ -57,7 +57,7 @@ def mocked_client(mock_aws_env):
 
 @pytest.fixture()
 def mocked_table(mock_aws_env):
-    with moto.mock_dynamodb2():
+    with moto.mock_dynamodb():
         utils.create_test_table(TEST_TABLE_NAME)
         utils.fill_table(TEST_TABLE_NAME, TEST_TABLE_ITEM_COUNT)
         yield
