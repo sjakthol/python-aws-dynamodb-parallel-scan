@@ -22,7 +22,7 @@ python = "^3.7"
 [tool.poetry.dev-dependencies]
 bandit = "^1.7.4"
 black = "^22.12"
-boto3-stubs = {extras = ["dynamodb"], version = "^1.26.27"}
+boto3-stubs = {extras = ["dynamodb"], version = "^1.26.32"}
 more-itertools = "^9.0.0"
 mypy = "^0.991"
 pylint = "^2.13.9"
