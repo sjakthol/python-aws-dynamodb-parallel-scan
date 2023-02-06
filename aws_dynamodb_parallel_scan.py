@@ -53,7 +53,6 @@ class Paginator:  # pylint: disable=too-few-public-methods
         # pylint: enable=line-too-long
         segments = kwargs.get("TotalSegments") or 1
         with concurrent.futures.ThreadPoolExecutor(max_workers=segments) as executor:
-
             # Prepare Scan arguments for each segment of the parallel scan.
             tasks = (
                 {**kwargs, "TotalSegments": segments, "Segment": i}
