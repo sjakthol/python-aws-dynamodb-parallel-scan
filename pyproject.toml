@@ -28,7 +28,7 @@ mypy = "^1.1"
 pylint = "^2.13.9"
 pytest = "^7.2.2"
 pytest-cov = "^4.0.0"
-moto = {extras = ["dynamodb2"], version = "^4.1.5"}
+moto = {extras = ["dynamodb2"], version = "^4.1.6"}
 
 [build-system]
 requires = ["poetry-core>=1.0.0"]
