@@ -1167,14 +1167,14 @@ files = [
 
 [[package]]
 name = "moto"
-version = "4.1.6"
+version = "4.1.7"
 description = ""
 category = "dev"
 optional = false
 python-versions = ">=3.7"
 files = [
-    {file = "moto-4.1.6-py2.py3-none-any.whl", hash = "sha256:cfe398a1f6e317d061c47c3d2dd8c6893f3eb49154984a7cbb8bcd4ba517d67d"},
-    {file = "moto-4.1.6.tar.gz", hash = "sha256:fdcc2731212ca050a28b2bc83e87628294bcbd55cb4f4c4692f972023fb1e7e6"},
+    {file = "moto-4.1.7-py2.py3-none-any.whl", hash = "sha256:56de986179f79920f59243bc532e03a7039d24a5ee5aec2eb3b666dcd23d6262"},
+    {file = "moto-4.1.7.tar.gz", hash = "sha256:fb9a7615f744da4ea7f154ff8e79782b19781344a6356ca4c0d6217c1237d379"},
 ]
 
 [package.dependencies]
@@ -1910,4 +1910,4 @@ testing = ["flake8 (<5)", "func-timeout", "jaraco.functools", "jaraco.itertools"
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.7"
-content-hash = "1761349886e5c5d8540c1b99ba2f0f86bb17f38edcf2121ca42651712b150b92"
+content-hash = "d68776959716882f06dee0f683e033d3c16bd96d9956edd7f5d4efc4762ad610"
