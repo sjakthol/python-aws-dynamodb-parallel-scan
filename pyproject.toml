@@ -16,16 +16,16 @@ aws-dynamodb-parallel-scan = 'aws_dynamodb_parallel_scan:cli'
 
 
 [tool.poetry.dependencies]
-boto3 = "^1.18.43"
-python = "^3.7"
+boto3 = "^1.28"
+python = "^3.7.2"
 
 [tool.poetry.dev-dependencies]
 bandit = "^1.7.5"
 black = "^23.3"
-boto3-stubs = {extras = ["dynamodb"], version = "^1.28.20"}
+boto3-stubs = {extras = ["dynamodb"], version = "^1.28"}
 more-itertools = "^9.1.0"
 mypy = "^1.4"
-pylint = "^2.13.9"
+pylint = "^2.16"
 pytest = "^7.4.0"
 pytest-cov = "^4.1.0"
 moto = {extras = ["dynamodb2"], version = "^4.1.14"}
