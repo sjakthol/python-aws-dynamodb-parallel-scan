@@ -1429,13 +1429,13 @@ testutils = ["gitpython (>3)"]
 
 [[package]]
 name = "pytest"
-version = "7.4.3"
+version = "7.4.4"
 description = "pytest: simple powerful testing with Python"
 optional = false
 python-versions = ">=3.7"
 files = [
-    {file = "pytest-7.4.3-py3-none-any.whl", hash = "sha256:0d009c083ea859a71b76adf7c1d502e4bc170b80a8ef002da5806527b9591fac"},
-    {file = "pytest-7.4.3.tar.gz", hash = "sha256:d989d136982de4e3b29dabcc838ad581c64e8ed52c11fbe86ddebd9da0818cd5"},
+    {file = "pytest-7.4.4-py3-none-any.whl", hash = "sha256:b090cdf5ed60bf4c45261be03239c2c1c22df034fbffe691abe93cd80cea01d8"},
+    {file = "pytest-7.4.4.tar.gz", hash = "sha256:2cf0005922c6ace4a3e2ec8b4080eb0d9753fdc93107415332f50ce9e7994280"},
 ]
 
 [package.dependencies]
@@ -1921,4 +1921,4 @@ testing = ["big-O", "flake8 (<5)", "jaraco.functools", "jaraco.itertools", "more
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.7.2"
-content-hash = "2e6c6269fa0badb283b4daa624d1d52d4c88a70f48701849bf6acfac160afc24"
+content-hash = "7ff9876eb65c6c1b5567459fb469493beb40de69f4ce70e0b5c71aca6a28286a"
