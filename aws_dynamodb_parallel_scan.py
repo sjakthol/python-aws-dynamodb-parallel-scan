@@ -54,19 +54,14 @@ class Paginator:  # pylint: disable=too-few-public-methods
         segments = kwargs.get("TotalSegments") or 1
         with concurrent.futures.ThreadPoolExecutor(max_workers=segments) as executor:
             # Prepare Scan arguments for each segment of the parallel scan.
-            tasks = (
-                {**kwargs, "TotalSegments": segments, "Segment": i}
-                for i in range(segments)
-            )
+            tasks = ({**kwargs, "TotalSegments": segments, "Segment": i} for i in range(segments))
 
             # Submit scan operation for each segment
             futures = {executor.submit(self._client.scan, **t): t for t in tasks}
 
             while futures:
                 # Collect results
-                done, _ = concurrent.futures.wait(
-                    futures, return_when=concurrent.futures.FIRST_COMPLETED
-                )
+                done, _ = concurrent.futures.wait(futures, return_when=concurrent.futures.FIRST_COMPLETED)
 
                 for future in done:
                     # Get the result and the scan args for the completed operation
@@ -81,7 +76,7 @@ class Paginator:  # pylint: disable=too-few-public-methods
                         futures[
                             executor.submit(
                                 self._client.scan,
-                                **{**task, "ExclusiveStartKey": next_key}
+                                **{**task, "ExclusiveStartKey": next_key},
                             )
                         ] = task
 
@@ -126,9 +121,7 @@ def cli():
         ),
         epilog="Results are written to stdout as JSON objects (one per line).",
     )
-    parser.add_argument(
-        "--table-name", dest="TableName", metavar="<value>", required=True
-    )
+    parser.add_argument("--table-name", dest="TableName", metavar="<value>", required=True)
     parser.add_argument("--index-name", dest="IndexName", metavar="<value>")
     parser.add_argument("--limit", dest="Limit", metavar="<value>", type=int)
     parser.add_argument(
@@ -136,17 +129,13 @@ def cli():
         dest="ReturnConsumedCapacity",
         metavar="<value>",
     )
-    parser.add_argument(
-        "--total-segments", dest="TotalSegments", metavar="<value>", type=int
-    )
+    parser.add_argument("--total-segments", dest="TotalSegments", metavar="<value>", type=int)
     parser.add_argument(
         "--projection-expression",
         dest="ProjectionExpression",
         metavar="<value>",
     )
-    parser.add_argument(
-        "--filter-expression", dest="FilterExpression", metavar="<value>"
-    )
+    parser.add_argument("--filter-expression", dest="FilterExpression", metavar="<value>")
     parser.add_argument("--consistent-read", dest="ConsistentRead", action="store_true")
     parser.add_argument(
         "--expression-attribute-names",
@@ -179,11 +168,7 @@ def cli():
     use_document_client = args.pop("use_document_client", False)
     scan_args = {k: v for k, v in args.items() if v is not None}
 
-    client = (
-        boto3.client("dynamodb")
-        if not use_document_client
-        else boto3.resource("dynamodb").meta.client
-    )
+    client = boto3.client("dynamodb") if not use_document_client else boto3.resource("dynamodb").meta.client
     paginator = get_paginator(client)
     for page in paginator.paginate(**scan_args):
         if output_items:

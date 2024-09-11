@@ -34,12 +34,8 @@ logging.getLogger("botocore").setLevel(logging.INFO)
 )
 def test_integration(real_table, scan_args, returned_items):
     logging.info("Scanning table with args %s", scan_args)
-    paginator = aws_dynamodb_parallel_scan.get_paginator(
-        utils.dynamodb_document_client()
-    )
-    items = utils.items_from_pages(
-        paginator.paginate(TableName=TEST_TABLE_NAME, **scan_args)
-    )
+    paginator = aws_dynamodb_parallel_scan.get_paginator(utils.dynamodb_document_client())
+    items = utils.items_from_pages(paginator.paginate(TableName=TEST_TABLE_NAME, **scan_args))
 
     assert len(items) == returned_items
     assert sorted(items, key=operator.itemgetter("pk")) == sorted(
