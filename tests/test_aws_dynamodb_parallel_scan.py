@@ -6,6 +6,7 @@ import unittest.mock
 import pytest
 
 import aws_dynamodb_parallel_scan
+
 from . import utils
 
 MOCK_TABLE_NAME = "dynamodb-parallel-scan-testtable"
@@ -22,9 +23,7 @@ MOCK_TABLE_NAME = "dynamodb-parallel-scan-testtable"
 )
 def test_parallel_scan_mocked_client(mocked_client, scan_args):
     paginator = aws_dynamodb_parallel_scan.get_paginator(mocked_client)
-    items = utils.items_from_pages(
-        paginator.paginate(TableName=MOCK_TABLE_NAME, **scan_args)
-    )
+    items = utils.items_from_pages(paginator.paginate(TableName=MOCK_TABLE_NAME, **scan_args))
     assert len(items) == 205
     assert sorted(items, key=operator.itemgetter("pk")) == sorted(
         utils.generate_items(205), key=operator.itemgetter("pk")
@@ -57,12 +56,8 @@ def test_parallel_scan_mocked_table(
     scan_args,
     returned_items,
 ):
-    paginator = aws_dynamodb_parallel_scan.get_paginator(
-        utils.dynamodb_document_client()
-    )
-    items = utils.items_from_pages(
-        paginator.paginate(TableName=MOCK_TABLE_NAME, **scan_args)
-    )
+    paginator = aws_dynamodb_parallel_scan.get_paginator(utils.dynamodb_document_client())
+    items = utils.items_from_pages(paginator.paginate(TableName=MOCK_TABLE_NAME, **scan_args))
     assert len(items) == returned_items
     assert sorted(items, key=operator.itemgetter("pk")) == sorted(
         utils.generate_items(returned_items), key=operator.itemgetter("pk")
@@ -84,7 +79,7 @@ def test_cli_scan_mocked_client(mocked_client, extra_args, capsys):
         with unittest.mock.patch("boto3.client", return_value=mocked_client):
             aws_dynamodb_parallel_scan.cli()
 
-    pages = [json.loads(l) for l in capsys.readouterr().out.split("\n") if l]
+    pages = [json.loads(line) for line in capsys.readouterr().out.split("\n") if line]
     items = list(itertools.chain(*(page["Items"] for page in pages)))
 
     assert len(items) == 205

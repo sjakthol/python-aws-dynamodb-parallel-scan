@@ -1,9 +1,9 @@
 """Helpers for tests."""
 
-from decimal import Decimal
 import itertools
 import json
 import logging
+from decimal import Decimal
 from typing import Iterable
 
 import boto3
@@ -67,9 +67,7 @@ def create_test_table(table_name: str):
         },
         TableName=table_name,
     )
-    client.get_waiter("table_exists").wait(
-        TableName=table_name, WaiterConfig=WAITER_CONFIG
-    )
+    client.get_waiter("table_exists").wait(TableName=table_name, WaiterConfig=WAITER_CONFIG)
 
 
 def fill_table(table_name: str, n: int):
@@ -83,11 +81,7 @@ def fill_table(table_name: str, n: int):
     logging.info("Filling table %s with %i items", table_name, n)
     client = boto3.resource("dynamodb").meta.client
     for batch in more_itertools.chunked(generate_items(n), 25):
-        client.batch_write_item(
-            RequestItems={
-                table_name: [{"PutRequest": {"Item": item}} for item in batch]
-            }
-        )
+        client.batch_write_item(RequestItems={table_name: [{"PutRequest": {"Item": item}} for item in batch]})
 
 
 def delete_table(table_name):
@@ -96,9 +90,7 @@ def delete_table(table_name):
     client.delete_table(TableName=table_name)
 
     logging.info("Waiting for deletion to complete")
-    client.get_waiter("table_not_exists").wait(
-        TableName=table_name, WaiterConfig=WAITER_CONFIG
-    )
+    client.get_waiter("table_not_exists").wait(TableName=table_name, WaiterConfig=WAITER_CONFIG)
 
 
 def no_op(v):
@@ -115,7 +107,7 @@ def parse_jsonl(text: str):
     Returns:
         List of parsed JSON objects.
     """
-    return [json.loads(l) for l in text.split("\n") if l]
+    return [json.loads(line) for line in text.split("\n") if line]
 
 
 def items_from_pages_output(output: str):

@@ -16,9 +16,7 @@ MOCK_SCAN_ITEMS = utils.generate_items(TEST_TABLE_ITEM_COUNT)
 
 def mock_scan(**kwargs):
     """Mocked version of DynamoDB scan that supports parallel scanning."""
-    segments = list(
-        more_itertools.divide(kwargs.get("TotalSegments", 1), MOCK_SCAN_ITEMS)
-    )
+    segments = list(more_itertools.divide(kwargs.get("TotalSegments", 1), MOCK_SCAN_ITEMS))
     segment = list(segments[kwargs.get("Segment", 0)])
 
     limit = kwargs.get("Limit", 100)
