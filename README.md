@@ -100,12 +100,9 @@ $ aws-dynamodb-parallel-scan --table-name mytable --total-segments 5 \
 
 ## Development
 
-Requires Python 3 and Poetry. Useful commands:
+Requires Python 3 and uv. Useful commands:
 
 ```bash
-# Setup environment
-poetry install
-
 # Run tests (integration test requires rights to create, delete and use DynamoDB tables)
 make test
 

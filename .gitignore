@@ -3,6 +3,7 @@
 __pycache__
 .mypy_cache
 .coverage
+.venv
 
 dist/
 *.tar.gz
