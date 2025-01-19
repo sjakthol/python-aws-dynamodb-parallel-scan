@@ -3,5 +3,18 @@
   "extends": [
     "config:recommended"
   ],
-  "schedule": ["every sunday"]
+  "schedule": ["every sunday"],
+  "packageRules": [
+    {
+      "groupName": "non-development dependencies",
+      "matchDepTypes": ["dependencies"]
+    },
+    {
+      "groupName": "development dependencies",
+      "matchDepTypes": ["devDependencies"]
+    }
+  ],
+  "lockFileMaintenance": {
+    "enabled": true
+  }
 }
