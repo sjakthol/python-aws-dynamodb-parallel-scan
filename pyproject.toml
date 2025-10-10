@@ -14,8 +14,8 @@ dependencies = [
 [project.scripts]
 aws-dynamodb-parallel-scan = 'aws_dynamodb_parallel_scan:cli'
 
-[tool.uv]
-dev-dependencies = [
+[dependency-groups]
+dev = [
   "bandit",
   "boto3-stubs[dynamodb]",
   "more-itertools",
@@ -27,8 +27,8 @@ dev-dependencies = [
 ]
 
 [build-system]
-requires = ["hatchling"]
-build-backend = "hatchling.build"
+requires = ["uv_build>=0.9.1,<0.10.0"]
+build-backend = "uv_build"
 
 [tool.ruff]
 line-length = 120
