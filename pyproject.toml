@@ -1,12 +1,12 @@
 [project]
 name = "aws-dynamodb-parallel-scan"
-version = "1.1.0"
+version = "1.2.0"
 description = "Amazon DynamoDB Parallel Scan Paginator for boto3."
 readme = "README.md"
 authors = [
     { name = "Sami Jaktholm", email = "sjakthol@outlook.com" }
 ]
-requires-python = ">=3.8"
+requires-python = ">=3.10"
 dependencies = [
   "boto3"
 ]
