@@ -3,8 +3,8 @@
 import itertools
 import json
 import logging
+from collections.abc import Iterable
 from decimal import Decimal
-from typing import Iterable
 
 import boto3
 import boto3.dynamodb.types
@@ -14,6 +14,8 @@ from mypy_boto3_dynamodb.type_defs import ScanOutputTypeDef, WaiterConfigTypeDef
 
 DDB_DESERIALIZER = boto3.dynamodb.types.TypeDeserializer()
 WAITER_CONFIG: WaiterConfigTypeDef = {"Delay": 2, "MaxAttempts": 30}
+
+logger = logging.getLogger("test.utils")
 
 
 def deserialize_item(item: dict):
@@ -53,7 +55,7 @@ def generate_items(n: int):
 
 
 def create_test_table(table_name: str):
-    logging.info("Creating table %s", table_name)
+    logger.info("Creating table %s", table_name)
     client = boto3.client("dynamodb")
     client.create_table(
         AttributeDefinitions=[
@@ -78,18 +80,18 @@ def fill_table(table_name: str, n: int):
         n: Number of items to create.
 
     """
-    logging.info("Filling table %s with %i items", table_name, n)
+    logger.info("Filling table %s with %i items", table_name, n)
     client = boto3.resource("dynamodb").meta.client
     for batch in more_itertools.chunked(generate_items(n), 25):
         client.batch_write_item(RequestItems={table_name: [{"PutRequest": {"Item": item}} for item in batch]})
 
 
 def delete_table(table_name):
-    logging.info("Deleting table %s", table_name)
+    logger.info("Deleting table %s", table_name)
     client = boto3.client("dynamodb")
     client.delete_table(TableName=table_name)
 
-    logging.info("Waiting for deletion to complete")
+    logger.info("Waiting for deletion to complete")
     client.get_waiter("table_not_exists").wait(TableName=table_name, WaiterConfig=WAITER_CONFIG)
 
 
