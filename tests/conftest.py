@@ -70,7 +70,7 @@ def real_table():
         utils.create_test_table(TEST_TABLE_NAME)
         utils.fill_table(TEST_TABLE_NAME, TEST_TABLE_ITEM_COUNT)
     except (botocore.exceptions.BotoCoreError, botocore.exceptions.ClientError) as exc:
-        pytest.skip("Failed to create table, skipping integration test (%s)" % exc)
+        pytest.skip(f"Failed to create table, skipping integration test ({exc})")
         return
 
     yield

@@ -10,6 +10,7 @@ from . import utils
 
 TEST_TABLE_NAME = "dynamodb-parallel-scan-testtable"
 
+logger = logging.getLogger("test")
 logging.getLogger("botocore").setLevel(logging.INFO)
 
 
@@ -17,23 +18,23 @@ logging.getLogger("botocore").setLevel(logging.INFO)
     ("scan_args", "returned_items"),
     [
         ({}, 205),
-        (dict(TotalSegments=4), 205),
-        (dict(TotalSegments=4, Segment=1), 205),
-        (dict(TotalSegments=25), 205),
-        (dict(TotalSegments=4, Limit=100), 205),
+        ({"TotalSegments": 4}, 205),
+        ({"TotalSegments": 4, "Segment": 1}, 205),
+        ({"TotalSegments": 25}, 205),
+        ({"TotalSegments": 4, "Limit": 100}, 205),
         (
-            dict(
-                TotalSegments=4,
-                Limit=100,
-                FilterExpression="attr2 < :val",
-                ExpressionAttributeValues={":val": 10},
-            ),
+            {
+                "TotalSegments": 4,
+                "Limit": 100,
+                "FilterExpression": "attr2 < :val",
+                "ExpressionAttributeValues": {":val": 10},
+            },
             10,
         ),
     ],
 )
 def test_integration(real_table, scan_args, returned_items):
-    logging.info("Scanning table with args %s", scan_args)
+    logger.info("Scanning table with args %s", scan_args)
     paginator = aws_dynamodb_parallel_scan.get_paginator(utils.dynamodb_document_client())
     items = utils.items_from_pages(paginator.paginate(TableName=TEST_TABLE_NAME, **scan_args))
 

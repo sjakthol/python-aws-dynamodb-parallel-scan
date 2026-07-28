@@ -16,9 +16,9 @@ MOCK_TABLE_NAME = "dynamodb-parallel-scan-testtable"
     "scan_args",
     [
         {},
-        dict(TotalSegments=4),
-        dict(TotalSegments=25),
-        dict(TotalSegments=4, Limit=100),
+        {"TotalSegments": 4},
+        {"TotalSegments": 25},
+        {"TotalSegments": 4, "Limit": 100},
     ],
 )
 def test_parallel_scan_mocked_client(mocked_client, scan_args):
@@ -43,10 +43,10 @@ def test_parallel_scan_with_break(mocked_client):
     [
         ({}, 205),
         (
-            dict(
-                FilterExpression="attr2 < :mv",
-                ExpressionAttributeValues={":mv": 10},
-            ),
+            {
+                "FilterExpression": "attr2 < :mv",
+                "ExpressionAttributeValues": {":mv": 10},
+            },
             10,
         ),
     ],
@@ -75,9 +75,8 @@ def test_parallel_scan_mocked_table(
 )
 def test_cli_scan_mocked_client(mocked_client, extra_args, capsys):
     args = ["aws-dynamodb-parallel-scan", "--table-name", MOCK_TABLE_NAME] + extra_args
-    with unittest.mock.patch("sys.argv", args):
-        with unittest.mock.patch("boto3.client", return_value=mocked_client):
-            aws_dynamodb_parallel_scan.cli()
+    with unittest.mock.patch("sys.argv", args), unittest.mock.patch("boto3.client", return_value=mocked_client):
+        aws_dynamodb_parallel_scan.cli()
 
     pages = [json.loads(line) for line in capsys.readouterr().out.split("\n") if line]
     items = list(itertools.chain(*(page["Items"] for page in pages)))
